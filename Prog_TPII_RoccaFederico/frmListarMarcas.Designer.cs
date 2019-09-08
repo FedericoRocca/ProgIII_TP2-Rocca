@@ -37,9 +37,14 @@
             // 
             // dgvListaMarcas
             // 
+            this.dgvListaMarcas.AllowUserToAddRows = false;
+            this.dgvListaMarcas.AllowUserToDeleteRows = false;
             this.dgvListaMarcas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListaMarcas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvListaMarcas.Location = new System.Drawing.Point(13, 13);
+            this.dgvListaMarcas.MultiSelect = false;
             this.dgvListaMarcas.Name = "dgvListaMarcas";
+            this.dgvListaMarcas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvListaMarcas.Size = new System.Drawing.Size(485, 238);
             this.dgvListaMarcas.TabIndex = 0;
             // 
@@ -51,6 +56,7 @@
             this.btnEliminar.TabIndex = 1;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnCancelar
             // 
@@ -70,6 +76,7 @@
             this.btnModificar.TabIndex = 4;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // frmListarMarcas
             // 

@@ -34,6 +34,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.dgvResultados = new System.Windows.Forms.DataGridView();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,12 +61,12 @@
             // 
             this.txbMarcaaBuscar.Location = new System.Drawing.Point(99, 6);
             this.txbMarcaaBuscar.Name = "txbMarcaaBuscar";
-            this.txbMarcaaBuscar.Size = new System.Drawing.Size(209, 20);
+            this.txbMarcaaBuscar.Size = new System.Drawing.Size(350, 20);
             this.txbMarcaaBuscar.TabIndex = 2;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(314, 4);
+            this.btnBuscar.Location = new System.Drawing.Point(455, 4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 3;
@@ -75,9 +76,14 @@
             // 
             // dgvResultados
             // 
+            this.dgvResultados.AllowUserToAddRows = false;
+            this.dgvResultados.AllowUserToDeleteRows = false;
             this.dgvResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResultados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvResultados.Location = new System.Drawing.Point(15, 32);
+            this.dgvResultados.MultiSelect = false;
             this.dgvResultados.Name = "dgvResultados";
+            this.dgvResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvResultados.Size = new System.Drawing.Size(515, 224);
             this.dgvResultados.TabIndex = 4;
             // 
@@ -89,12 +95,24 @@
             this.btnEliminar.TabIndex = 5;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(96, 262);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 6;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // frmBuscarMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(537, 292);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.dgvResultados);
             this.Controls.Add(this.btnBuscar);
@@ -119,5 +137,6 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridView dgvResultados;
         private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnModificar;
     }
 }

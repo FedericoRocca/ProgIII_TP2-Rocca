@@ -16,3 +16,4 @@ C:\Users\frocc\Desktop\Repos\Prog_TPII_RoccaFederico\Prog_TPII_RoccaFederico\obj
 C:\Users\frocc\Desktop\Repos\Prog_TPII_RoccaFederico\Prog_TPII_RoccaFederico\obj\Debug\Prog_TPII_RoccaFederico.exe
 C:\Users\frocc\Desktop\Repos\Prog_TPII_RoccaFederico\Prog_TPII_RoccaFederico\obj\Debug\Prog_TPII_RoccaFederico.pdb
 C:\Users\frocc\Desktop\Repos\Prog_TPII_RoccaFederico\Prog_TPII_RoccaFederico\obj\Debug\Prog_TPII_RoccaFederico.frmBuscarMarcas.resources
+C:\Users\frocc\Desktop\Repos\Prog_TPII_RoccaFederico\Prog_TPII_RoccaFederico\obj\Debug\Prog_TPII_RoccaFederico.frmModificacionMarca.resources

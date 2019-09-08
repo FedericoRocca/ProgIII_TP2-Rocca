@@ -128,5 +128,70 @@ namespace Negocio
             }
         }
 
+        public bool bajaMarca(Marca reg)
+        {
+
+            SqlConnection conn = new SqlConnection();
+            SqlCommand comm = new SqlCommand();
+
+            try
+            {
+
+                conn.ConnectionString = connectionString;
+                comm.Connection = conn;
+                comm.CommandType = System.Data.CommandType.Text;
+                comm.CommandText = "delete from MARCAS where Id = '" + reg.codigo + "' and Descripcion = '" + reg.descripcion + "';";
+                conn.Open();
+                int result = comm.ExecuteNonQuery();
+                if (result <= 0)
+                {
+                    return false;
+                }
+                else return true;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public bool modificarMarca(Marca reg, string newDesc)
+        {
+
+            SqlConnection conn = new SqlConnection();
+            SqlCommand comm = new SqlCommand();
+
+            try
+            {
+
+                conn.ConnectionString = connectionString;
+                comm.Connection = conn;
+                comm.CommandType = System.Data.CommandType.Text;
+                comm.CommandText = "update MARCAS set Descripcion = '" + newDesc + "' where Id = '" + reg.codigo + "';";
+                conn.Open();
+                int result = comm.ExecuteNonQuery();
+                if (result <= 0)
+                {
+                    return false;
+                }
+                else return true;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

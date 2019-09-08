@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Negocio;
+using Dominio;
 
 namespace Prog_TPII_RoccaFederico
 {
@@ -38,6 +39,63 @@ namespace Prog_TPII_RoccaFederico
             {
 
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Marca aux = new Marca();
+            try
+            {
+                aux.codigo = (int)dgvListaMarcas.SelectedRows[0].Cells[0].Value;
+                aux.descripcion = dgvListaMarcas.SelectedRows[0].Cells[1].Value.ToString();
+
+                DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar el registro " + aux.codigo + ", " + aux.descripcion + "?", "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if( confirmation == DialogResult.Yes )
+                {
+                    MarcaNegocio marcaNegocio = new MarcaNegocio();
+                    if(marcaNegocio.bajaMarca(aux) == false)
+                    {
+                        MessageBox.Show("Hubo problemas al eliminar el registro.");
+                    }
+                    else
+                    {
+                        dgvListaMarcas.DataSource = marcaNegocio.listarMarcas();
+                        MessageBox.Show("Se eliminó el registro.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Marca aux = new Marca();
+            MarcaNegocio marcaNegocio = new MarcaNegocio();
+
+            try
+            {
+                aux.codigo = (int)dgvListaMarcas.SelectedRows[0].Cells[0].Value;
+                aux.descripcion = dgvListaMarcas.SelectedRows[0].Cells[1].Value.ToString();
+
+                frmModificacionMarca modificar = new frmModificacionMarca();
+
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+                    if( Application.OpenForms[i].GetType() == typeof(frmMain) )
+                    {
+                        modificar.MdiParent = Application.OpenForms[i];
+                    }
+                }
+                modificar.putInfo(aux, dgvListaMarcas);
+                modificar.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
