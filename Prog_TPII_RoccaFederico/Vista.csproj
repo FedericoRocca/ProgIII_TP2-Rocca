@@ -58,6 +58,12 @@
     <Compile Include="frmBuscarMarcas.Designer.cs">
       <DependentUpon>frmBuscarMarcas.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmListarCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListarCategorias.Designer.cs">
+      <DependentUpon>frmListarCategorias.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmListarMarcas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBuscarMarcas.resx">
       <DependentUpon>frmBuscarMarcas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListarCategorias.resx">
+      <DependentUpon>frmListarCategorias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmListarMarcas.resx">
       <DependentUpon>frmListarMarcas.cs</DependentUpon>

@@ -111,8 +111,9 @@
             // smiCategoriaListar
             // 
             this.smiCategoriaListar.Name = "smiCategoriaListar";
-            this.smiCategoriaListar.Size = new System.Drawing.Size(109, 22);
+            this.smiCategoriaListar.Size = new System.Drawing.Size(180, 22);
             this.smiCategoriaListar.Text = "Listar";
+            this.smiCategoriaListar.Click += new System.EventHandler(this.smiCategoriaListar_Click);
             // 
             // smiCategoriaBuscar
             // 
@@ -136,21 +137,21 @@
             // smiMarcaAlta
             // 
             this.smiMarcaAlta.Name = "smiMarcaAlta";
-            this.smiMarcaAlta.Size = new System.Drawing.Size(180, 22);
+            this.smiMarcaAlta.Size = new System.Drawing.Size(109, 22);
             this.smiMarcaAlta.Text = "Alta";
             this.smiMarcaAlta.Click += new System.EventHandler(this.smiMarcaAlta_Click);
             // 
             // smiMarcaListar
             // 
             this.smiMarcaListar.Name = "smiMarcaListar";
-            this.smiMarcaListar.Size = new System.Drawing.Size(180, 22);
+            this.smiMarcaListar.Size = new System.Drawing.Size(109, 22);
             this.smiMarcaListar.Text = "Listar";
             this.smiMarcaListar.Click += new System.EventHandler(this.smiMarcaListar_Click);
             // 
             // smiMarcaBuscar
             // 
             this.smiMarcaBuscar.Name = "smiMarcaBuscar";
-            this.smiMarcaBuscar.Size = new System.Drawing.Size(180, 22);
+            this.smiMarcaBuscar.Size = new System.Drawing.Size(109, 22);
             this.smiMarcaBuscar.Text = "Buscar";
             this.smiMarcaBuscar.Click += new System.EventHandler(this.smiMarcaBuscar_Click);
             // 
@@ -168,6 +169,7 @@
             this.IsMdiContainer = true;
             this.MaximizeBox = false;
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Programación III - Trabajo práctico N° 2";
             this.tspMenu.ResumeLayout(false);
             this.tspMenu.PerformLayout();

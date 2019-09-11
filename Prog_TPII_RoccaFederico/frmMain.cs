@@ -102,5 +102,35 @@ namespace Prog_TPII_RoccaFederico
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void smiCategoriaListar_Click(object sender, EventArgs e)
+        {
+            bool isListarCategoriasOpen = false;
+
+            try
+            {
+
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+                    if( Application.OpenForms[i].GetType() == typeof(frmListarCategorias) )
+                    {
+                        isListarCategoriasOpen = true;
+                    }
+                }
+
+                if( !isListarCategoriasOpen )
+                {
+                    frmListarCategorias listarCategorias = new frmListarCategorias();
+                    listarCategorias.MdiParent = this;
+                    listarCategorias.Show();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

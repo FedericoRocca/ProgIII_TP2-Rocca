@@ -47,7 +47,7 @@ namespace Prog_TPII_RoccaFederico
             Marca aux = new Marca();
             try
             {
-                aux.codigo = (int)dgvListaMarcas.SelectedRows[0].Cells[0].Value;
+                aux.codigo = (Int32)dgvListaMarcas.SelectedRows[0].Cells[0].Value;
                 aux.descripcion = dgvListaMarcas.SelectedRows[0].Cells[1].Value.ToString();
 
                 DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar el registro " + aux.codigo + ", " + aux.descripcion + "?", "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -78,7 +78,7 @@ namespace Prog_TPII_RoccaFederico
 
             try
             {
-                aux.codigo = (int)dgvListaMarcas.SelectedRows[0].Cells[0].Value;
+                aux.codigo = (Int32)dgvListaMarcas.SelectedRows[0].Cells[0].Value;
                 aux.descripcion = dgvListaMarcas.SelectedRows[0].Cells[1].Value.ToString();
 
                 frmModificacionMarca modificar = new frmModificacionMarca();

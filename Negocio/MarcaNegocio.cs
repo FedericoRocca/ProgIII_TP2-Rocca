@@ -69,7 +69,7 @@ namespace Negocio
 
                 while( read.Read() )
                 {
-                    aux = new Marca((int)read["Id"], read["Descripcion"].ToString());
+                    aux = new Marca((Int32)read["Id"], read["Descripcion"].ToString());
                     listaMarcas.Add(aux);
                 }
                 return listaMarcas;
@@ -100,7 +100,7 @@ namespace Negocio
                 conn.ConnectionString = connectionString;
                 comm.CommandType = System.Data.CommandType.Text;
                 comm.Connection = conn;
-                comm.CommandText = "select Id ,Descripcion from MARCAS where LOWER(Descripcion) like '%" + toSearch + "%';";
+                comm.CommandText = "select Id ,Descripcion from MARCAS where LOWER(Descripcion) like '%" + toSearch.ToLower() + "%';";
 //                TODO
 //                Ver por qué chota no funcionó con parámetros...
 //                comm.Parameters.Clear();
@@ -110,7 +110,7 @@ namespace Negocio
 
                 while(read.Read())
                 {
-                    reg = new Marca((int)read["Id"], read["Descripcion"].ToString());
+                    reg = new Marca((Int32)read["Id"], read["Descripcion"].ToString());
                     results.Add(reg);
                 }
 
