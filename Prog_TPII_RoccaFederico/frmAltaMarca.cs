@@ -40,10 +40,10 @@ namespace Prog_TPII_RoccaFederico
                 marca.descripcion = txbDescripcion.Text;
                 if(marcaNegocio.altaMarcaDB(marca) == true)
                 {
-                    MessageBox.Show("Registro dado de alta de manera correcta.");
+                    MessageBox.Show("Marca dada de alta de manera correcta.");
                     this.Dispose();
                 }
-                else MessageBox.Show("No se dió de alta el registro.");
+                else MessageBox.Show("No se dió de alta la marca.");
             }
             catch (Exception ex)
             {

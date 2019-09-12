@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Negocio;
+using Dominio;
 
 namespace Prog_TPII_RoccaFederico
 {
@@ -39,6 +40,51 @@ namespace Prog_TPII_RoccaFederico
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Categoria aux = new Categoria();
+            try
+            {
+                if(dgvListaCategorias.Rows.Count > 0)
+                {
+                    aux.codigo = (Int32)dgvListaCategorias.SelectedRows[0].Cells[0].Value;
+                    aux.descripcion = dgvListaCategorias.SelectedRows[0].Cells[1].Value.ToString();
+                    DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar la categoría " + aux.codigo + ", \"" + aux.descripcion + "\"?", "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (confirmation == DialogResult.Yes)
+                    {
+                        CategoriaNegocio catNegocio = new CategoriaNegocio();
+                        if (catNegocio.bajaCategoría(aux) == false)
+                        {
+                            MessageBox.Show("Hubo problemas al eliminar la categoría");
+                        }
+                        else
+                        {
+                            dgvListaCategorias.DataSource = catNegocio.listarCategorias();
+                            MessageBox.Show("Se eliminó la categoría " + aux.codigo + ", \"" + aux.descripcion + "\"");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

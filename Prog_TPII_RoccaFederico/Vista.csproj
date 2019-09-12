@@ -46,11 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAltaCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAltaCategoria.Designer.cs">
+      <DependentUpon>frmAltaCategoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAltaMarca.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmAltaMarca.Designer.cs">
       <DependentUpon>frmAltaMarca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscarCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBuscarCategoria.Designer.cs">
+      <DependentUpon>frmBuscarCategoria.cs</DependentUpon>
     </Compile>
     <Compile Include="frmBuscarMarcas.cs">
       <SubType>Form</SubType>
@@ -84,8 +96,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAltaCategoria.resx">
+      <DependentUpon>frmAltaCategoria.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAltaMarca.resx">
       <DependentUpon>frmAltaMarca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscarCategoria.resx">
+      <DependentUpon>frmBuscarCategoria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBuscarMarcas.resx">
       <DependentUpon>frmBuscarMarcas.cs</DependentUpon>

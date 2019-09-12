@@ -150,10 +150,10 @@ namespace Negocio
                 else return true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             finally
             {

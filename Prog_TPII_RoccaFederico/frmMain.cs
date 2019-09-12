@@ -132,5 +132,59 @@ namespace Prog_TPII_RoccaFederico
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void smiCategoriaBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool isBuscarCategoriaOpen = false;
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+                    if( Application.OpenForms[i].GetType() == typeof(frmBuscarCategoria) )
+                    {
+                        isBuscarCategoriaOpen = true;
+                    }
+                }
+
+                if( !isBuscarCategoriaOpen )
+                {
+                    frmBuscarCategoria frmBuscar = new frmBuscarCategoria();
+                    frmBuscar.MdiParent = this;
+                    frmBuscar.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void smiCategoriaAlta_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool isAltaCategoriaOpen = false;
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+                    if (Application.OpenForms[i].GetType() == typeof(frmAltaCategoria) )
+                    {
+                        isAltaCategoriaOpen = true;
+                    }
+                }
+
+                if( !isAltaCategoriaOpen )
+                {
+                    frmAltaCategoria altaCategoria = new frmAltaCategoria();
+                    altaCategoria.MdiParent = this;
+                    altaCategoria.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

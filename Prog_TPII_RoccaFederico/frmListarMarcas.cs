@@ -47,21 +47,24 @@ namespace Prog_TPII_RoccaFederico
             Marca aux = new Marca();
             try
             {
-                aux.codigo = (Int32)dgvListaMarcas.SelectedRows[0].Cells[0].Value;
-                aux.descripcion = dgvListaMarcas.SelectedRows[0].Cells[1].Value.ToString();
-
-                DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar el registro " + aux.codigo + ", " + aux.descripcion + "?", "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if( confirmation == DialogResult.Yes )
+                if(dgvListaMarcas.Rows.Count > 0)
                 {
-                    MarcaNegocio marcaNegocio = new MarcaNegocio();
-                    if(marcaNegocio.bajaMarca(aux) == false)
+                    aux.codigo = (Int32)dgvListaMarcas.SelectedRows[0].Cells[0].Value;
+                    aux.descripcion = dgvListaMarcas.SelectedRows[0].Cells[1].Value.ToString();
+
+                    DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar la marca " + aux.codigo + ", \"" + aux.descripcion + "\"?", "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (confirmation == DialogResult.Yes)
                     {
-                        MessageBox.Show("Hubo problemas al eliminar el registro.");
-                    }
-                    else
-                    {
-                        dgvListaMarcas.DataSource = marcaNegocio.listarMarcas();
-                        MessageBox.Show("Se eliminó el registro.");
+                        MarcaNegocio marcaNegocio = new MarcaNegocio();
+                        if (marcaNegocio.bajaMarca(aux) == false)
+                        {
+                            MessageBox.Show("Hubo problemas al eliminar la marca.");
+                        }
+                        else
+                        {
+                            dgvListaMarcas.DataSource = marcaNegocio.listarMarcas();
+                            MessageBox.Show("Se eliminó la marca " + aux.codigo + ", \"" + aux.descripcion + "\"");
+                        }
                     }
                 }
             }
@@ -78,20 +81,23 @@ namespace Prog_TPII_RoccaFederico
 
             try
             {
-                aux.codigo = (Int32)dgvListaMarcas.SelectedRows[0].Cells[0].Value;
-                aux.descripcion = dgvListaMarcas.SelectedRows[0].Cells[1].Value.ToString();
-
-                frmModificacionMarca modificar = new frmModificacionMarca();
-
-                for (int i = 0; i < Application.OpenForms.Count; i++)
+                if(dgvListaMarcas.Rows.Count > 0)
                 {
-                    if( Application.OpenForms[i].GetType() == typeof(frmMain) )
+                    aux.codigo = (Int32)dgvListaMarcas.SelectedRows[0].Cells[0].Value;
+                    aux.descripcion = dgvListaMarcas.SelectedRows[0].Cells[1].Value.ToString();
+
+                    frmModificacionMarca modificar = new frmModificacionMarca();
+
+                    for (int i = 0; i < Application.OpenForms.Count; i++)
                     {
-                        modificar.MdiParent = Application.OpenForms[i];
+                        if (Application.OpenForms[i].GetType() == typeof(frmMain))
+                        {
+                            modificar.MdiParent = Application.OpenForms[i];
+                        }
                     }
+                    modificar.putInfo(aux, dgvListaMarcas);
+                    modificar.Show();
                 }
-                modificar.putInfo(aux, dgvListaMarcas);
-                modificar.Show();
             }
             catch (Exception ex)
             {

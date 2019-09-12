@@ -105,8 +105,9 @@
             // smiCategoriaAlta
             // 
             this.smiCategoriaAlta.Name = "smiCategoriaAlta";
-            this.smiCategoriaAlta.Size = new System.Drawing.Size(109, 22);
+            this.smiCategoriaAlta.Size = new System.Drawing.Size(180, 22);
             this.smiCategoriaAlta.Text = "Alta";
+            this.smiCategoriaAlta.Click += new System.EventHandler(this.smiCategoriaAlta_Click);
             // 
             // smiCategoriaListar
             // 
@@ -118,8 +119,9 @@
             // smiCategoriaBuscar
             // 
             this.smiCategoriaBuscar.Name = "smiCategoriaBuscar";
-            this.smiCategoriaBuscar.Size = new System.Drawing.Size(109, 22);
+            this.smiCategoriaBuscar.Size = new System.Drawing.Size(180, 22);
             this.smiCategoriaBuscar.Text = "Buscar";
+            this.smiCategoriaBuscar.Click += new System.EventHandler(this.smiCategoriaBuscar_Click);
             // 
             // ddbtnMarcas
             // 
