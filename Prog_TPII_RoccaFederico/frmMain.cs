@@ -186,5 +186,37 @@ namespace Prog_TPII_RoccaFederico
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void SmiArticuloListar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool isListadoArticulosOpen = false;
+
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+
+                    if( Application.OpenForms[i].GetType() == typeof( frmListarArticulos ) )
+                    {
+                        isListadoArticulosOpen = true;
+                    }
+
+                }
+
+                if(!isListadoArticulosOpen)
+                {
+                    frmListarArticulos listadoArticulos = new frmListarArticulos();
+                    listadoArticulos.MdiParent = this;
+                    listadoArticulos.Show();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

@@ -10,3 +10,9 @@ C:\Users\frocc\Desktop\Repos\ProgIII_TPII_RoccaFederico\Dominio\obj\Debug\Domini
 C:\Users\frocc\Desktop\Repos\ProgIII_TPII_RoccaFederico\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\frocc\Desktop\Repos\ProgIII_TPII_RoccaFederico\Dominio\obj\Debug\Dominio.dll
 C:\Users\frocc\Desktop\Repos\ProgIII_TPII_RoccaFederico\Dominio\obj\Debug\Dominio.pdb
+C:\Users\frocc\Desktop\Repos\ProgIII_TP2-Rocca\Dominio\bin\Debug\Dominio.dll
+C:\Users\frocc\Desktop\Repos\ProgIII_TP2-Rocca\Dominio\bin\Debug\Dominio.pdb
+C:\Users\frocc\Desktop\Repos\ProgIII_TP2-Rocca\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+C:\Users\frocc\Desktop\Repos\ProgIII_TP2-Rocca\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\frocc\Desktop\Repos\ProgIII_TP2-Rocca\Dominio\obj\Debug\Dominio.dll
+C:\Users\frocc\Desktop\Repos\ProgIII_TP2-Rocca\Dominio\obj\Debug\Dominio.pdb

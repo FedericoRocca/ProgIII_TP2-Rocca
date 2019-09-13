@@ -74,19 +74,20 @@
             // smiArticuloAlta
             // 
             this.smiArticuloAlta.Name = "smiArticuloAlta";
-            this.smiArticuloAlta.Size = new System.Drawing.Size(109, 22);
+            this.smiArticuloAlta.Size = new System.Drawing.Size(180, 22);
             this.smiArticuloAlta.Text = "Alta";
             // 
             // smiArticuloListar
             // 
             this.smiArticuloListar.Name = "smiArticuloListar";
-            this.smiArticuloListar.Size = new System.Drawing.Size(109, 22);
+            this.smiArticuloListar.Size = new System.Drawing.Size(180, 22);
             this.smiArticuloListar.Text = "Listar";
+            this.smiArticuloListar.Click += new System.EventHandler(this.SmiArticuloListar_Click);
             // 
             // smiArticuloBuscar
             // 
             this.smiArticuloBuscar.Name = "smiArticuloBuscar";
-            this.smiArticuloBuscar.Size = new System.Drawing.Size(109, 22);
+            this.smiArticuloBuscar.Size = new System.Drawing.Size(180, 22);
             this.smiArticuloBuscar.Text = "Buscar";
             // 
             // ddbtnCategorias
@@ -105,21 +106,21 @@
             // smiCategoriaAlta
             // 
             this.smiCategoriaAlta.Name = "smiCategoriaAlta";
-            this.smiCategoriaAlta.Size = new System.Drawing.Size(180, 22);
+            this.smiCategoriaAlta.Size = new System.Drawing.Size(109, 22);
             this.smiCategoriaAlta.Text = "Alta";
             this.smiCategoriaAlta.Click += new System.EventHandler(this.smiCategoriaAlta_Click);
             // 
             // smiCategoriaListar
             // 
             this.smiCategoriaListar.Name = "smiCategoriaListar";
-            this.smiCategoriaListar.Size = new System.Drawing.Size(180, 22);
+            this.smiCategoriaListar.Size = new System.Drawing.Size(109, 22);
             this.smiCategoriaListar.Text = "Listar";
             this.smiCategoriaListar.Click += new System.EventHandler(this.smiCategoriaListar_Click);
             // 
             // smiCategoriaBuscar
             // 
             this.smiCategoriaBuscar.Name = "smiCategoriaBuscar";
-            this.smiCategoriaBuscar.Size = new System.Drawing.Size(180, 22);
+            this.smiCategoriaBuscar.Size = new System.Drawing.Size(109, 22);
             this.smiCategoriaBuscar.Text = "Buscar";
             this.smiCategoriaBuscar.Click += new System.EventHandler(this.smiCategoriaBuscar_Click);
             // 

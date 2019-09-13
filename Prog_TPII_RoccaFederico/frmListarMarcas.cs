@@ -38,7 +38,7 @@ namespace Prog_TPII_RoccaFederico
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 

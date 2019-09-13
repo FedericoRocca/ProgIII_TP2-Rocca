@@ -15,6 +15,30 @@ namespace Dominio
         public Marca marca { get; set; }
         public Categoria categoria { get; set; }
         public string imagen { get; set; }
-        public float precio { get; set; }
+        public decimal precio { get; set; }
+
+        public Articulo() { }
+
+        public Articulo( 
+            Int32 _id, 
+            string _codigo, 
+            string _nombre, 
+            string _descripcion, 
+            Int32 _Idmarca, 
+            string _DescMarca,
+            Int32 _IdCategoria,
+            string _DescCategoria,
+            string _imagen, 
+            decimal _precio )
+        {
+            id = _id;
+            codigo = _codigo;
+            nombre = _nombre;
+            descripcion = _descripcion;
+            marca = new Marca(_Idmarca, _DescMarca);
+            categoria = new Categoria( _IdCategoria, _DescCategoria );
+            imagen = _imagen;
+            precio = _precio;
+        }
     }
 }
