@@ -76,9 +76,39 @@ namespace Prog_TPII_RoccaFederico
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            Categoria aux = new Categoria();
+            CategoriaNegocio marcaNegocio = new CategoriaNegocio();
             try
             {
+                if (dgvListaCategorias.Rows.Count > 0)
+                {
+                    bool isModifCategorioOpen = false;
+                    for (int i = 0; i < Application.OpenForms.Count; i++)
+                    {
+                        if( Application.OpenForms[i].GetType() == typeof(frmModificacionCategoria) )
+                        {
+                            isModifCategorioOpen = true;
+                        }
+                    }
 
+                    if( !isModifCategorioOpen )
+                    {
+                        aux.codigo = (Int32)dgvListaCategorias.SelectedRows[0].Cells[0].Value;
+                        aux.descripcion = dgvListaCategorias.SelectedRows[0].Cells[1].Value.ToString();
+
+                        frmModificacionCategoria modificar = new frmModificacionCategoria();
+
+                        for (int i = 0; i < Application.OpenForms.Count; i++)
+                        {
+                            if (Application.OpenForms[i].GetType() == typeof(frmMain))
+                            {
+                                modificar.MdiParent = Application.OpenForms[i];
+                            }
+                        }
+                        modificar.putInfo(aux, dgvListaCategorias);
+                        modificar.Show();
+                    }
+                }
             }
             catch (Exception ex)
             {

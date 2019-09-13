@@ -50,5 +50,80 @@ namespace Prog_TPII_RoccaFederico
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Categoria aux = new Categoria();
+            try
+            {
+                if (dgvResultados.Rows.Count > 0)
+                {
+                    aux.codigo = (Int32)dgvResultados.SelectedRows[0].Cells[0].Value;
+                    aux.descripcion = dgvResultados.SelectedRows[0].Cells[1].Value.ToString();
+                    DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar la categoría " + aux.codigo + ", \"" + aux.descripcion + "\"?", "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (confirmation == DialogResult.Yes)
+                    {
+                        CategoriaNegocio catNegocio = new CategoriaNegocio();
+                        if (catNegocio.bajaCategoría(aux) == false)
+                        {
+                            MessageBox.Show("Hubo problemas al eliminar la categoría");
+                        }
+                        else
+                        {
+                            dgvResultados.DataSource = catNegocio.listarCategorias();
+                            MessageBox.Show("Se eliminó la categoría " + aux.codigo + ", \"" + aux.descripcion + "\"");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Categoria aux = new Categoria();
+            CategoriaNegocio marcaNegocio = new CategoriaNegocio();
+            try
+            {
+                if (dgvResultados.Rows.Count > 0)
+                {
+                    bool isModifCategorioOpen = false;
+                    for (int i = 0; i < Application.OpenForms.Count; i++)
+                    {
+                        if (Application.OpenForms[i].GetType() == typeof(frmModificacionCategoria))
+                        {
+                            isModifCategorioOpen = true;
+                        }
+                    }
+
+                    if (!isModifCategorioOpen)
+                    {
+                        aux.codigo = (Int32)dgvResultados.SelectedRows[0].Cells[0].Value;
+                        aux.descripcion = dgvResultados.SelectedRows[0].Cells[1].Value.ToString();
+
+                        frmModificacionCategoria modificar = new frmModificacionCategoria();
+
+                        for (int i = 0; i < Application.OpenForms.Count; i++)
+                        {
+                            if (Application.OpenForms[i].GetType() == typeof(frmMain))
+                            {
+                                modificar.MdiParent = Application.OpenForms[i];
+                            }
+                        }
+                        modificar.putInfo(aux, dgvResultados);
+                        modificar.Show();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
