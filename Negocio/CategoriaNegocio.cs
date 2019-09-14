@@ -12,7 +12,7 @@ namespace Negocio
     {
 
         /// private string connectionString = "data source=DESKTOP-BA6HNP1\\SQLEXPRESS01; integrated security=sspi; initial catalog=CATALOGO_DB;";
-        private string connectionString = "data source=DESKTOP-SI2UFE1\\SQLEXPRESS; integrated security=sspi; initial catalog=CATALOGO_DB;";
+        private string connectionString = "data source=DESKTOP-BA6HNP1\\SQLEXPRESS01; integrated security=sspi; initial catalog=CATALOGO_DB;";
 
         public List<Categoria> listarCategorias()
         {
