@@ -31,6 +31,7 @@ namespace Prog_TPII_RoccaFederico
 
                 ArticuloNegocio artNegocio = new ArticuloNegocio();
                 dgvListaArticulos.DataSource = artNegocio.listarArticulos();
+                dgvListaArticulos.Columns[0].Visible = false;
                 dgvListaArticulos.Refresh();
 
             }

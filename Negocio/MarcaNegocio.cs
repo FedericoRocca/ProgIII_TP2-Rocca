@@ -102,10 +102,6 @@ namespace Negocio
                 comm.CommandType = System.Data.CommandType.Text;
                 comm.Connection = conn;
                 comm.CommandText = "select Id ,Descripcion from MARCAS where LOWER(Descripcion) like '%" + toSearch.ToLower() + "%';";
-//                TODO
-//                Ver por qué chota no funcionó con parámetros...
-//                comm.Parameters.Clear();
-//                comm.Parameters.AddWithValue("@Search", toSearch);
                 conn.Open();
                 read = comm.ExecuteReader();
 

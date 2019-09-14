@@ -17,5 +17,10 @@ namespace Dominio
             descripcion = _descripcion;
             codigo = _codigo;
         }
+
+        public override string ToString()
+        {
+            return descripcion;
+        }
     }
 }
