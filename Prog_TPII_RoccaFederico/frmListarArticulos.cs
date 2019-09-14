@@ -41,5 +41,40 @@ namespace Prog_TPII_RoccaFederico
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+            Articulo registro = new Articulo();
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+
+            try
+            {
+                registro = (Articulo)dgvListaArticulos.SelectedRows[0].DataBoundItem;
+
+                DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar el articulo " + registro.codigo + ", \"" 
+                    + registro.nombre + ", \"" + registro.descripcion + "\"?", 
+                    "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                if( confirmation == DialogResult.Yes )
+                {
+                    if( articuloNegocio.bajaArticulo(registro) == true)
+                    {
+                        MessageBox.Show("Se dio de baja el artículo.");
+                        dgvListaArticulos.DataSource = articuloNegocio.listarArticulos();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

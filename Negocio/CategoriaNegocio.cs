@@ -10,31 +10,20 @@ namespace Negocio
 {
     public class CategoriaNegocio
     {
-
-        /// private string connectionString = "data source=DESKTOP-BA6HNP1\\SQLEXPRESS01; integrated security=sspi; initial catalog=CATALOGO_DB;";
-        private string connectionString = "data source=DESKTOP-BA6HNP1\\SQLEXPRESS01; integrated security=sspi; initial catalog=CATALOGO_DB;";
-
         public List<Categoria> listarCategorias()
         {
-
-            SqlConnection conn = new SqlConnection();
-            SqlCommand comm = new SqlCommand();
-            SqlDataReader reader;
+            DDBBGateway ddbbData = new DDBBGateway();
             Categoria aux;
             List<Categoria> resultados = new List<Categoria>();
 
             try
             {
-                conn.ConnectionString = connectionString;
-                comm.Connection = conn;
-                comm.CommandType = System.Data.CommandType.Text;
-                comm.CommandText = "select id, Descripcion from CATEGORIAS;";
-                conn.Open();
-                reader = comm.ExecuteReader();
+                ddbbData.prepareQuery("select id, Descripcion from CATEGORIAS;");
+                ddbbData.sendQuery();
 
-                while (reader.Read() )
+                while ( ddbbData.getReader().Read() )
                 {
-                    aux = new Categoria( (Int32)reader["id"], reader["Descripcion"].ToString());
+                    aux = new Categoria( (Int32)ddbbData.getReader()["id"], ddbbData.getReader()["Descripcion"].ToString());
                     resultados.Add(aux);
                 }
 
@@ -48,33 +37,25 @@ namespace Negocio
             }
             finally
             {
-                conn.Close();
+                ddbbData.closeConnection();
             }
         }
 
         public List<Categoria> BuscarCategorias(string ToSearch)
         {
-
-            SqlConnection conn = new SqlConnection();
-            SqlCommand comm = new SqlCommand();
-            SqlDataReader reader;
+            DDBBGateway ddbbData = new DDBBGateway();
             Categoria aux;
             List<Categoria> Resultados = new List<Categoria>();
             ToSearch = ToSearch.ToLower();
 
             try
             {
+                ddbbData.prepareQuery("select Id, Descripcion from CATEGORIAS where Descripcion like lower('%" + ToSearch + "%');");
+                ddbbData.sendQuery();
 
-                conn.ConnectionString = connectionString;
-                comm.Connection = conn;
-                comm.CommandType = System.Data.CommandType.Text;
-                comm.CommandText = "select Id, Descripcion from CATEGORIAS where Descripcion like lower('%" + ToSearch + "%');";
-                conn.Open();
-                reader = comm.ExecuteReader();
-
-                while(reader.Read())
+                while( ddbbData.getReader().Read() )
                 {
-                    aux = new Categoria( (Int32)reader["Id"], reader["Descripcion"].ToString() );
+                    aux = new Categoria( (Int32)ddbbData.getReader()["Id"], ddbbData.getReader()["Descripcion"].ToString() );
                     Resultados.Add(aux);
                 }
 
@@ -88,26 +69,20 @@ namespace Negocio
             }
             finally
             {
-                conn.Close();
+                ddbbData.closeConnection();
             }
         }
 
         public bool altaCategoria( Categoria reg )
         {
 
-            SqlCommand comm = new SqlCommand();
-            SqlConnection conn = new SqlConnection();
+            DDBBGateway ddbbData = new DDBBGateway();
 
             try
             {
-
-                conn.ConnectionString = connectionString;
-                comm.Connection = conn;
-                comm.CommandType = System.Data.CommandType.Text;
-                comm.CommandText = "insert into CATEGORIAS values ('" + reg.descripcion + "');";
-                conn.Open();
-                int result = comm.ExecuteNonQuery();
-                if( result >= 0 )
+                ddbbData.prepareStatement("insert into CATEGORIAS values ('" + reg.descripcion + "');");
+                ddbbData.sendStatement();
+                if( ddbbData.getAffectedRows() >= 0 )
                 {
                     return true;
                 } else return false;
@@ -119,26 +94,21 @@ namespace Negocio
             }
             finally
             {
-                conn.Close();
+                ddbbData.closeConnection();
             }
         }
 
         public bool bajaCategoría( Categoria reg )
         {
 
-            SqlCommand comm = new SqlCommand();
-            SqlConnection conn = new SqlConnection();
+            DDBBGateway ddbbData = new DDBBGateway();
 
             try
             {
 
-                conn.ConnectionString = connectionString;
-                comm.Connection = conn;
-                comm.CommandType = System.Data.CommandType.Text;
-                comm.CommandText = "delete from CATEGORIAS where Id = '" + reg.codigo + "' and Descripcion = '" + reg.descripcion + "';";
-                conn.Open();
-                int result = comm.ExecuteNonQuery();
-                if (result <= 0)
+                ddbbData.prepareStatement("delete from CATEGORIAS where Id = '" + reg.codigo + "' and Descripcion = '" + reg.descripcion + "';");
+                ddbbData.sendStatement();
+                if (ddbbData.getAffectedRows() <= 0)
                 {
                     return false;
                 }
@@ -151,25 +121,20 @@ namespace Negocio
             }
             finally
             {
-                conn.Close();
+                ddbbData.closeConnection();
             }
         }
 
         public bool modificarCategoria( Categoria reg , string newDesc)
         {
 
-            SqlConnection conn = new SqlConnection();
-            SqlCommand comm = new SqlCommand();
+            DDBBGateway ddbbData = new DDBBGateway();
 
             try
             {
-                conn.ConnectionString = connectionString;
-                comm.Connection = conn;
-                comm.CommandType = System.Data.CommandType.Text;
-                comm.CommandText = "update CATEGORIAS set Descripcion = '" + newDesc + "' where Id = '" + reg.codigo + "' and Descripcion = '" + reg.descripcion + "';";
-                conn.Open();
-                int result = comm.ExecuteNonQuery();
-                if (result <= 0)
+                ddbbData.prepareStatement("update CATEGORIAS set Descripcion = '" + newDesc + "' where Id = '" + reg.codigo + "' and Descripcion = '" + reg.descripcion + "';");
+                ddbbData.sendStatement();
+                if (ddbbData.getAffectedRows() <= 0)
                 {
                     return false;
                 }
@@ -182,7 +147,7 @@ namespace Negocio
             }
             finally
             {
-                conn.Close();
+                ddbbData.closeConnection();
             }
         }
 

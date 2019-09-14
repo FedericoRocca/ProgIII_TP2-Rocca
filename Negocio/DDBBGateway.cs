@@ -10,13 +10,16 @@ namespace Negocio
     public class DDBBGateway
     {
 
-        private SqlConnection connection;
-        private SqlCommand command;
+        private SqlConnection connection = new SqlConnection();
+        private SqlCommand command = new SqlCommand();
         private SqlDataReader reader;
-        int affectedRows;
+        private int affectedRows;
 
         private string connectionString;
 
+        /// <summary>
+        /// Constructor de la clase
+        /// </summary>
         public DDBBGateway()
         {
             /// Desktop-PC
@@ -30,23 +33,51 @@ namespace Negocio
             affectedRows = 0;
         }
 
+        /// <summary>
+        /// Devuelve un Int32 con la cantidad de registros afectados luego del sendStatement()
+        /// </summary>
+        public int getAffectedRows()
+        {
+            return affectedRows;
+        }
+
+        /// <summary>
+        /// Obtiene el SqlDataReader luego de ejecutado el sendQuery
+        /// </summary>
+        public SqlDataReader getReader()
+        {
+            return reader;
+        }
+
+        /// <summary>
+        /// Prepara la query que se pasa por parámetro. Se debe ejecutar previo al sendQuery()
+        /// </summary>
         public void prepareQuery(string query)
         {
             command.CommandType = System.Data.CommandType.Text;
             command.CommandText = query;
         }
 
+        /// <summary>
+        /// Prepara la sentencia que se pasa por parámetro. Se debe ejecutar previo al sendStatement()
+        /// </summary>
         public void prepareStatement(string statement)
         {
             command.CommandType = System.Data.CommandType.Text;
             command.CommandText = statement;
         }
 
+        /// <summary>
+        /// Agrega el valor value al parámetro name
+        /// </summary>
         public void addParameter(object name, object value)
         {
             command.Parameters.AddWithValue(name.ToString(), value.ToString());
         }
 
+        /// <summary>
+        /// Envía la query a la DDBB. Posterior a prepareQuery().
+        /// </summary>
         public void sendQuery()
         {
             try
@@ -61,6 +92,9 @@ namespace Negocio
             }
         }
 
+        /// <summary>
+        /// Envía la sentencia a la DDBB. Posterior a prepareStatement().
+        /// </summary>
         public void sendStatement()
         {
             try
@@ -75,10 +109,24 @@ namespace Negocio
             }
         }
 
-        ~DDBBGateway()
+        /// <summary>
+        /// Libera la conexión contra la DDBB
+        /// </summary>
+        public void closeConnection()
         {
-            reader.Close();
-            connection.Close();
+            try
+            {
+                if(reader != null && !reader.IsClosed)
+                {
+                    reader.Close();
+                }
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
     }

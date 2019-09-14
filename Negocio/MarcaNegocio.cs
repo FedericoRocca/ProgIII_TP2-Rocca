@@ -11,28 +11,16 @@ namespace Negocio
     public class MarcaNegocio
     {
 
-        /// private string connectionString = "data source=DESKTOP-BA6HNP1\\SQLEXPRESS01; integrated security=sspi; initial catalog=CATALOGO_DB;";
-        private string connectionString = "data source=DESKTOP-BA6HNP1\\SQLEXPRESS01; integrated security=sspi; initial catalog=CATALOGO_DB;";
-
         public bool altaMarcaDB(Marca reg)
         {
-
-            SqlCommand command = new SqlCommand();
-            SqlConnection connection = new SqlConnection();
-
+            DDBBGateway ddbbData = new DDBBGateway();
             try
             {
+                ddbbData.prepareStatement("insert into MARCAS values(@Descripcion)");
+                ddbbData.addParameter("@Descripcion", reg.descripcion);
+                ddbbData.sendStatement();
 
-                connection.ConnectionString = connectionString;
-                command.CommandType = System.Data.CommandType.Text;
-                command.Connection = connection;
-                command.CommandText = "insert into MARCAS values (@Descripcion)";
-                command.Parameters.Clear();
-                command.Parameters.AddWithValue("@Descripcion", reg.descripcion);
-                connection.Open();
-                int result = command.ExecuteNonQuery();
-
-                if (result <= 0)
+                if (ddbbData.getAffectedRows() <= 0)
                 {
                     return false;
                 }
@@ -46,7 +34,7 @@ namespace Negocio
             }
             finally
             {
-                connection.Close();
+                ddbbData = null;
             }
         }
 
@@ -55,22 +43,17 @@ namespace Negocio
 
             Marca aux;
             List<Marca> listaMarcas = new List<Marca>();
-            SqlConnection conn = new SqlConnection();
-            SqlCommand comm = new SqlCommand();
-            SqlDataReader read;
+            DDBBGateway ddbbData = new DDBBGateway();
 
             try
             {
-                conn.ConnectionString = connectionString;
-                comm.Connection = conn;
-                comm.CommandType = System.Data.CommandType.Text;
-                comm.CommandText = "select Id, Descripcion from MARCAS";
-                conn.Open();
-                read = comm.ExecuteReader();
 
-                while( read.Read() )
+                ddbbData.prepareQuery("select Id, Descripcion from MARCAS");
+                ddbbData.sendQuery();
+
+                while (ddbbData.getReader().Read() )
                 {
-                    aux = new Marca((Int32)read["Id"], read["Descripcion"].ToString());
+                    aux = new Marca((Int32)ddbbData.getReader()["Id"], ddbbData.getReader()["Descripcion"].ToString());
                     listaMarcas.Add(aux);
                 }
                 return listaMarcas;
@@ -82,32 +65,26 @@ namespace Negocio
             }
             finally
             {
-                conn.Close();
+                ddbbData = null;
             }
         }
 
         public List<Marca> buscarMarca(string toSearch)
         {
 
-            SqlConnection conn = new SqlConnection();
-            SqlCommand comm = new SqlCommand();
-            SqlDataReader read;
             Marca reg;
             List<Marca> results = new List<Marca>();
+            DDBBGateway ddbbData = new DDBBGateway();
 
             try
             {
+                
+                ddbbData.prepareQuery("select Id ,Descripcion from MARCAS where LOWER(Descripcion) like '%" + toSearch.ToLower() + "%';");
+                ddbbData.sendQuery();
 
-                conn.ConnectionString = connectionString;
-                comm.CommandType = System.Data.CommandType.Text;
-                comm.Connection = conn;
-                comm.CommandText = "select Id ,Descripcion from MARCAS where LOWER(Descripcion) like '%" + toSearch.ToLower() + "%';";
-                conn.Open();
-                read = comm.ExecuteReader();
-
-                while(read.Read())
+                while(ddbbData.getReader().Read())
                 {
-                    reg = new Marca((Int32)read["Id"], read["Descripcion"].ToString());
+                    reg = new Marca((Int32)ddbbData.getReader()["Id"], ddbbData.getReader()["Descripcion"].ToString());
                     results.Add(reg);
                 }
 
@@ -121,26 +98,22 @@ namespace Negocio
             }
             finally
             {
-                conn.Close();
+                ddbbData = null;
             }
         }
 
         public bool bajaMarca(Marca reg)
         {
 
-            SqlConnection conn = new SqlConnection();
-            SqlCommand comm = new SqlCommand();
+            DDBBGateway ddbbData = new DDBBGateway();
 
             try
             {
 
-                conn.ConnectionString = connectionString;
-                comm.Connection = conn;
-                comm.CommandType = System.Data.CommandType.Text;
-                comm.CommandText = "delete from MARCAS where Id = '" + reg.codigo + "' and Descripcion = '" + reg.descripcion + "';";
-                conn.Open();
-                int result = comm.ExecuteNonQuery();
-                if (result <= 0)
+                ddbbData.prepareStatement("delete from MARCAS where Id = '" + reg.codigo + "' and Descripcion = '" + reg.descripcion + "';");
+                ddbbData.sendStatement();
+
+                if (ddbbData.getAffectedRows() <= 0)
                 {
                     return false;
                 }
@@ -154,26 +127,20 @@ namespace Negocio
             }
             finally
             {
-                conn.Close();
+                ddbbData = null;
             }
         }
 
         public bool modificarMarca(Marca reg, string newDesc)
         {
 
-            SqlConnection conn = new SqlConnection();
-            SqlCommand comm = new SqlCommand();
+            DDBBGateway ddbbData = new DDBBGateway();
 
             try
             {
-
-                conn.ConnectionString = connectionString;
-                comm.Connection = conn;
-                comm.CommandType = System.Data.CommandType.Text;
-                comm.CommandText = "update MARCAS set Descripcion = '" + newDesc + "' where Id = '" + reg.codigo + "';";
-                conn.Open();
-                int result = comm.ExecuteNonQuery();
-                if (result <= 0)
+                ddbbData.prepareStatement("update MARCAS set Descripcion = '" + newDesc + "' where Id = '" + reg.codigo + "';");
+                ddbbData.sendStatement();
+                if (ddbbData.getAffectedRows() <= 0)
                 {
                     return false;
                 }
@@ -187,7 +154,7 @@ namespace Negocio
             }
             finally
             {
-                conn.Close();
+                ddbbData = null;
             }
         }
     }

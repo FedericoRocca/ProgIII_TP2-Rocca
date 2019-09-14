@@ -10,39 +10,34 @@ namespace Negocio
 {
     public class ArticuloNegocio
     {
-        /// private string connectionString = "data source=DESKTOP-BA6HNP1\\SQLEXPRESS01; integrated security=sspi; initial catalog=CATALOGO_DB;";
-        private string connectionString = "data source=DESKTOP-BA6HNP1\\SQLEXPRESS01; integrated security=sspi; initial catalog=CATALOGO_DB;";
-
         public List<Articulo> listarArticulos()
         {
-
-            SqlConnection conn = new SqlConnection();
-            SqlCommand comm = new SqlCommand();
-            SqlDataReader reader;
+            DDBBGateway ddbbData = new DDBBGateway();
             List<Articulo> aux = new List<Articulo>();
 
             try
             {
 
-                conn.ConnectionString = connectionString;
-                comm.Connection = conn;
-                comm.CommandType = System.Data.CommandType.Text;
-                comm.CommandText = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Id as 'IdMarca', M.Descripcion as 'Marca', C.Id as 'IdDescripcion', C.Descripcion as 'Categoria', A.Imagen, A.Precio from ARTICULOS as A inner join MARCAS as M on (A.IdMarca = M.Id) inner join CATEGORIAS as C on ( A.IdCategoria = C.Id );";
-                conn.Open();
-                reader = comm.ExecuteReader();
-                while( reader.Read() )
+                ddbbData.prepareQuery("select A.Id, A.Codigo, A.Nombre, A.Descripcion, " +
+                                    "M.Id as 'IdMarca', M.Descripcion as 'Marca', " +
+                                    "C.Id as 'IdDescripcion', C.Descripcion as 'Categoria', " +
+                                    "A.Imagen, A.Precio from ARTICULOS as A inner join MARCAS" +
+                                    " as M on (A.IdMarca = M.Id) inner join CATEGORIAS as C on " +
+                                    "( A.IdCategoria = C.Id );");
+                ddbbData.sendQuery();
+                while (ddbbData.getReader().Read() )
                 {
                     aux.Add(new Articulo(
-                        (Int32)reader["Id"],
-                        reader["Codigo"].ToString(),
-                        reader["Nombre"].ToString(),
-                        reader["Descripcion"].ToString(),
-                        (Int32)reader["IdMarca"],
-                        reader["Marca"].ToString(),
-                        (Int32)reader["IdDescripcion"],
-                        reader["Categoria"].ToString(),
-                        reader["Imagen"].ToString(),
-                        (Decimal)reader["Precio"]
+                        (Int32)ddbbData.getReader()["Id"],
+                        ddbbData.getReader()["Codigo"].ToString(),
+                        ddbbData.getReader()["Nombre"].ToString(),
+                        ddbbData.getReader()["Descripcion"].ToString(),
+                        (Int32)ddbbData.getReader()["IdMarca"],
+                        ddbbData.getReader()["Marca"].ToString(),
+                        (Int32)ddbbData.getReader()["IdDescripcion"],
+                        ddbbData.getReader()["Categoria"].ToString(),
+                        ddbbData.getReader()["Imagen"].ToString(),
+                        (Decimal)ddbbData.getReader()["Precio"]
                         ));
                 }
 
@@ -56,7 +51,34 @@ namespace Negocio
             }
             finally
             {
-                conn.Close();
+                ddbbData.closeConnection();
+            }
+        }
+
+        public bool bajaArticulo( Articulo reg )
+        {
+
+            DDBBGateway ddbbData = new DDBBGateway();
+
+            try
+            {
+                ddbbData.prepareStatement("delete from ARTICULOS where Id = '" + reg.id + 
+                                          "' and Codigo = '" + reg.codigo + "' and Nombre = '" + reg.nombre + "';");
+                ddbbData.sendStatement();
+                if (ddbbData.getAffectedRows() <= 0)
+                {
+                    return false;
+                }
+                else return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                ddbbData.closeConnection();
             }
         }
     }

@@ -76,6 +76,7 @@
             this.smiArticuloAlta.Name = "smiArticuloAlta";
             this.smiArticuloAlta.Size = new System.Drawing.Size(180, 22);
             this.smiArticuloAlta.Text = "Alta";
+            this.smiArticuloAlta.Click += new System.EventHandler(this.smiArticuloAlta_Click);
             // 
             // smiArticuloListar
             // 

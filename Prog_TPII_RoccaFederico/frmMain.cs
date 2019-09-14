@@ -218,5 +218,34 @@ namespace Prog_TPII_RoccaFederico
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void smiArticuloAlta_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool isAltaArticuloOpen = false;
+
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+                    if( Application.OpenForms[i].GetType() == typeof( frmAltaArticulos ) )
+                    {
+                        isAltaArticuloOpen = true;
+                    }
+                }
+
+                if( !isAltaArticuloOpen )
+                {
+                    frmAltaArticulos altaArticulo = new frmAltaArticulos();
+                    altaArticulo.MdiParent = this;
+                    altaArticulo.Show();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
