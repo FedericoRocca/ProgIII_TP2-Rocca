@@ -81,5 +81,37 @@ namespace Negocio
                 ddbbData.closeConnection();
             }
         }
+
+        public bool altaArticulo( Articulo reg )
+        {
+            DDBBGateway ddbbData = new DDBBGateway();
+            try
+            {
+                ddbbData.prepareStatement("insert into ARTICULOS VALUES ( @cod, @nom, @desc, @idMar, @idCat, @ima, @pre);");
+                ddbbData.addParameter("@cod", reg.codigo);
+                ddbbData.addParameter("@nom", reg.nombre);
+                ddbbData.addParameter("@desc", reg.descripcion);
+                ddbbData.addParameter("@idMar", reg.marca.codigo);
+                ddbbData.addParameter("@idCat", reg.categoria.codigo);
+                ddbbData.addParameter("@ima", reg.imagen);
+                ddbbData.addParameter("@pre", reg.precio);
+                ddbbData.sendStatement();
+
+                if (ddbbData.getAffectedRows() <= 0)
+                {
+                    return false;
+                }
+                else return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                ddbbData.closeConnection();
+            }
+        }
     }
 }
