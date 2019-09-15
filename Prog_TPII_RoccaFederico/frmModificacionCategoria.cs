@@ -57,5 +57,18 @@ namespace Prog_TPII_RoccaFederico
             aux = _aux;
             dgvAux = _dgv;
         }
+
+        private void frmModificacionCategoria_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                txbDescripcion.Text = aux.descripcion;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

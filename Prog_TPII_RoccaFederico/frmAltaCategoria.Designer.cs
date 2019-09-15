@@ -83,6 +83,7 @@
             this.Name = "frmAltaCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta de categorias";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

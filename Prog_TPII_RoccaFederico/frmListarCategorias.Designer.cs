@@ -91,6 +91,7 @@
             this.Name = "frmListarCategorias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado de categorias";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmListarCategorias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaCategorias)).EndInit();
             this.ResumeLayout(false);

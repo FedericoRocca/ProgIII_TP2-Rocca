@@ -83,6 +83,8 @@
             this.Name = "frmModificacionCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modificación de categorias";
+            this.TopMost = true;
+            this.Load += new System.EventHandler(this.frmModificacionCategoria_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -56,22 +56,25 @@ namespace Prog_TPII_RoccaFederico
             Marca aux = new Marca();
             try
             {
-                aux.codigo = (Int32)dgvResultados.SelectedRows[0].Cells[0].Value;
-                aux.descripcion = dgvResultados.SelectedRows[0].Cells[1].Value.ToString();
-
-                DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar el registro " + aux.codigo + ", " + aux.descripcion + "?", "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if (confirmation == DialogResult.Yes)
+                if (dgvResultados.RowCount > 0)
                 {
-                    MarcaNegocio marcaNegocio = new MarcaNegocio();
-                    if (marcaNegocio.bajaMarca(aux) == false)
+                    aux.codigo = (Int32)dgvResultados.SelectedRows[0].Cells[0].Value;
+                    aux.descripcion = dgvResultados.SelectedRows[0].Cells[1].Value.ToString();
+
+                    DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar el registro " + aux.codigo + ", " + aux.descripcion + "?", "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (confirmation == DialogResult.Yes)
                     {
-                        MessageBox.Show("Hubo problemas al eliminar el registro.");
-                    }
-                    else
-                    {
-                        dgvResultados.DataSource = marcaNegocio.listarMarcas();
-                        MessageBox.Show("Se eliminó el registro.");
-                    }
+                        MarcaNegocio marcaNegocio = new MarcaNegocio();
+                        if (marcaNegocio.bajaMarca(aux) == false)
+                        {
+                            MessageBox.Show("Hubo problemas al eliminar el registro.");
+                        }
+                        else
+                        {
+                            dgvResultados.DataSource = marcaNegocio.listarMarcas();
+                            MessageBox.Show("Se eliminó el registro.");
+                        }
+                    } 
                 }
             }
             catch (Exception ex)

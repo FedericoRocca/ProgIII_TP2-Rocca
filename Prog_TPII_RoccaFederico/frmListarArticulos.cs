@@ -50,19 +50,22 @@ namespace Prog_TPII_RoccaFederico
 
             try
             {
-                registro = (Articulo)dgvListaArticulos.SelectedRows[0].DataBoundItem;
-
-                DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar el articulo " + registro.codigo + ", \"" 
-                    + registro.nombre + ", \"" + registro.descripcion + "\"?", 
-                    "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-
-                if( confirmation == DialogResult.Yes )
+                if (dgvListaArticulos.RowCount > 0)
                 {
-                    if( articuloNegocio.bajaArticulo(registro) == true)
+                    registro = (Articulo)dgvListaArticulos.SelectedRows[0].DataBoundItem;
+
+                    DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar el articulo " + registro.codigo + ", \""
+                        + registro.nombre + ", \"" + registro.descripcion + "\"?",
+                        "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                    if (confirmation == DialogResult.Yes)
                     {
-                        MessageBox.Show("Se dio de baja el artículo.");
-                        dgvListaArticulos.DataSource = articuloNegocio.listarArticulos();
-                    }
+                        if (articuloNegocio.bajaArticulo(registro) == true)
+                        {
+                            MessageBox.Show("Se dio de baja el artículo.");
+                            dgvListaArticulos.DataSource = articuloNegocio.listarArticulos();
+                        }
+                    } 
                 }
             }
             catch (Exception ex)
@@ -76,28 +79,33 @@ namespace Prog_TPII_RoccaFederico
         {
             try
             {
-                bool isModificarArticuloOpen = false;
-                for (int i = 0; i < Application.OpenForms.Count; i++)
-                {
-                    if( Application.OpenForms[i].GetType() == typeof( frmAltaArticulos ) )
-                    {
-                        isModificarArticuloOpen = true;
-                    }
-                }
 
-                if( !isModificarArticuloOpen && dgvListaArticulos.RowCount > 0 )
+                ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+
+                if (dgvListaArticulos.RowCount > 0)
                 {
-                    frmAltaArticulos frmModificar = new frmAltaArticulos((Articulo)dgvListaArticulos.CurrentRow.DataBoundItem);
+                    bool isModificarArticuloOpen = false;
                     for (int i = 0; i < Application.OpenForms.Count; i++)
                     {
-                        if( Application.OpenForms[i].GetType() == typeof(frmMain) )
+                        if (Application.OpenForms[i].GetType() == typeof(frmAltaArticulos))
                         {
-                            frmModificar.MdiParent = Application.OpenForms[i];
+                            isModificarArticuloOpen = true;
                         }
                     }
-                    frmModificar.Show();
+
+                    if (!isModificarArticuloOpen)
+                    {
+                        frmAltaArticulos frmModificar = new frmAltaArticulos((Articulo)dgvListaArticulos.CurrentRow.DataBoundItem, dgvListaArticulos);
+                        for (int i = 0; i < Application.OpenForms.Count; i++)
+                        {
+                            if (Application.OpenForms[i].GetType() == typeof(frmMain))
+                            {
+                                frmModificar.MdiParent = Application.OpenForms[i];
+                            }
+                        }
+                        frmModificar.Show();
+                    } 
                 }
-                
             }
             catch (Exception ex)
             {

@@ -91,6 +91,7 @@
             this.Name = "frmListarArticulos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmListarArticulos";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FrmListarArticulos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaArticulos)).EndInit();
             this.ResumeLayout(false);

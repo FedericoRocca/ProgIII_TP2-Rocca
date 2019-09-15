@@ -31,19 +31,22 @@ namespace Prog_TPII_RoccaFederico
 
             try
             {
-                registro = (Articulo)dgvResultados.SelectedRows[0].DataBoundItem;
-
-                DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar el articulo " + registro.codigo + ", \""
-                    + registro.nombre + ", \"" + registro.descripcion + "\"?",
-                    "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-
-                if (confirmation == DialogResult.Yes)
+                if (dgvResultados.RowCount > 0)
                 {
-                    if (articuloNegocio.bajaArticulo(registro) == true)
+                    registro = (Articulo)dgvResultados.SelectedRows[0].DataBoundItem;
+
+                    DialogResult confirmation = MessageBox.Show("Seguro que querés eliminar el articulo " + registro.codigo + ", \""
+                        + registro.nombre + ", \"" + registro.descripcion + "\"?",
+                        "Cuidado!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                    if (confirmation == DialogResult.Yes)
                     {
-                        MessageBox.Show("Se dio de baja el artículo.");
-                        dgvResultados.DataSource = articuloNegocio.listarArticulos();
-                    }
+                        if (articuloNegocio.bajaArticulo(registro) == true)
+                        {
+                            MessageBox.Show("Se dio de baja el artículo.");
+                            dgvResultados.DataSource = articuloNegocio.listarArticulos();
+                        }
+                    } 
                 }
             }
             catch (Exception ex)
@@ -57,26 +60,29 @@ namespace Prog_TPII_RoccaFederico
         {
             try
             {
-                bool isModificarArticuloOpen = false;
-                for (int i = 0; i < Application.OpenForms.Count; i++)
+                if (dgvResultados.RowCount > 0)
                 {
-                    if (Application.OpenForms[i].GetType() == typeof(frmAltaArticulos))
-                    {
-                        isModificarArticuloOpen = true;
-                    }
-                }
-
-                if (!isModificarArticuloOpen && dgvResultados.RowCount > 0)
-                {
-                    frmAltaArticulos frmModificar = new frmAltaArticulos((Articulo)dgvResultados.CurrentRow.DataBoundItem);
+                    bool isModificarArticuloOpen = false;
                     for (int i = 0; i < Application.OpenForms.Count; i++)
                     {
-                        if (Application.OpenForms[i].GetType() == typeof(frmMain))
+                        if (Application.OpenForms[i].GetType() == typeof(frmAltaArticulos))
                         {
-                            frmModificar.MdiParent = Application.OpenForms[i];
+                            isModificarArticuloOpen = true;
                         }
                     }
-                    frmModificar.Show();
+
+                    if (!isModificarArticuloOpen && dgvResultados.RowCount > 0)
+                    {
+                        frmAltaArticulos frmModificar = new frmAltaArticulos((Articulo)dgvResultados.CurrentRow.DataBoundItem, dgvResultados);
+                        for (int i = 0; i < Application.OpenForms.Count; i++)
+                        {
+                            if (Application.OpenForms[i].GetType() == typeof(frmMain))
+                            {
+                                frmModificar.MdiParent = Application.OpenForms[i];
+                            }
+                        }
+                        frmModificar.Show();
+                    } 
                 }
 
             }

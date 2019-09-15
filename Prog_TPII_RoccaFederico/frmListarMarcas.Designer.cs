@@ -91,6 +91,7 @@
             this.Name = "frmListarMarcas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado de marcas";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmListarMarcas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaMarcas)).EndInit();
             this.ResumeLayout(false);

@@ -16,16 +16,24 @@ namespace Prog_TPII_RoccaFederico
     {
 
         Articulo registro;
+        DataGridView aux;
 
         public frmAltaArticulos()
         {
             InitializeComponent();
         }
 
-        public frmAltaArticulos( Articulo _registro )
+        public frmAltaArticulos(Articulo _registro)
         {
             InitializeComponent();
             registro = _registro;
+        }
+
+        public frmAltaArticulos( Articulo _registro , DataGridView _aux)
+        {
+            InitializeComponent();
+            registro = _registro;
+            aux = _aux;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -91,6 +99,8 @@ namespace Prog_TPII_RoccaFederico
                         registro.precio = _precio;
                     }
 
+                    Validator.validate(registro);
+
                     if (articuloNegocio.altaArticulo(registro))
                     {
                         MessageBox.Show("Articulo dado de alta de manera correcta.");
@@ -111,9 +121,14 @@ namespace Prog_TPII_RoccaFederico
                     registro.nombre = txbNombre.Text;
                     decimal _precio;
                     decimal.TryParse(txbPrecio.Text, out _precio);
+
+                    Validator.validate(registro);
+
                     if (articuloNegocio.modificarArticulo(registro))
                     {
                         MessageBox.Show("Articulo modificado de manera correcta.");
+                        aux.DataSource = articuloNegocio.listarArticulos();
+                        aux.Refresh();
                         this.Dispose();
                     }
                     else
@@ -125,7 +140,7 @@ namespace Prog_TPII_RoccaFederico
             }
             catch (Exception ex)
             {
-
+                registro = null;
                 MessageBox.Show(ex.Message);
             }
 

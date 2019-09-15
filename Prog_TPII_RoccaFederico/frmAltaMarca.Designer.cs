@@ -83,6 +83,7 @@
             this.Name = "frmAltaMarca";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAltaMarca";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

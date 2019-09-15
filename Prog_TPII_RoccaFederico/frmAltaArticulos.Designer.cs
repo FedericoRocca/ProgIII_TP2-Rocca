@@ -207,6 +207,7 @@
             this.Name = "frmAltaArticulos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAltaArticulos";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmAltaArticulos_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
