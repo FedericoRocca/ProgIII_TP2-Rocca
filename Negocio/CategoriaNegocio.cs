@@ -127,11 +127,12 @@ namespace Negocio
 
         public bool modificarCategoria( Categoria reg , string newDesc)
         {
-
             DDBBGateway ddbbData = new DDBBGateway();
-
             try
             {
+
+                Validator.validate(reg, newDesc);
+
                 ddbbData.prepareStatement("update CATEGORIAS set Descripcion = '" + newDesc + "' where Id = '" + reg.codigo + "' and Descripcion = '" + reg.descripcion + "';");
                 ddbbData.sendStatement();
                 if (ddbbData.getAffectedRows() <= 0)

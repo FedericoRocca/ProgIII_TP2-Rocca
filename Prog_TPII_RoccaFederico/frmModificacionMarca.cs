@@ -41,17 +41,26 @@ namespace Prog_TPII_RoccaFederico
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            MarcaNegocio marcaNegocio = new MarcaNegocio();
-            if( marcaNegocio.modificarMarca(aux, txbDescripcion.Text) == false )
+            try
             {
-                MessageBox.Show("Hubo un error al modificar la marca.");
+                MarcaNegocio marcaNegocio = new MarcaNegocio();
+                Validator.validate(aux, txbDescripcion.Text);
+                if (marcaNegocio.modificarMarca(aux, txbDescripcion.Text) == false)
+                {
+                    MessageBox.Show("Hubo un error al modificar la marca.");
+                }
+                else
+                {
+                    dgvaux.DataSource = marcaNegocio.listarMarcas();
+                    dgvaux.Refresh();
+                    MessageBox.Show("Se modificó la marca correctamente.");
+                    this.Dispose();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                dgvaux.DataSource = marcaNegocio.listarMarcas();
-                dgvaux.Refresh();
-                MessageBox.Show("Se modificó la marca correctamente.");
-                this.Dispose();
+
+                MessageBox.Show(ex.Message);
             }
         }
     }

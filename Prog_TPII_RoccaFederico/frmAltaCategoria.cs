@@ -28,9 +28,11 @@ namespace Prog_TPII_RoccaFederico
         {
             try
             {
-
                 Categoria reg = new Categoria();
                 reg.descripcion = txbDescripcion.Text;
+
+                Validator.validate(reg);
+
                 CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
                 if( categoriaNegocio.altaCategoria(reg) == true )
                 {

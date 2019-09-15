@@ -67,3 +67,4 @@ C:\Users\frocc\Desktop\Repos\ProgIII_TP2-Rocca\Prog_TPII_RoccaFederico\obj\Debug
 C:\Users\frocc\Desktop\Repos\ProgIII_TP2-Rocca\Prog_TPII_RoccaFederico\obj\Debug\Prog_TPII_RoccaFederico.frmListarArticulos.resources
 C:\Users\frocc\Desktop\Repos\ProgIII_TPII_RoccaFederico\Prog_TPII_RoccaFederico\obj\Debug\Prog_TPII_RoccaFederico.frmListarArticulos.resources
 C:\Users\frocc\Desktop\Repos\ProgIII_TPII_RoccaFederico\Prog_TPII_RoccaFederico\obj\Debug\Prog_TPII_RoccaFederico.frmAltaArticulos.resources
+C:\Users\frocc\Desktop\Repos\ProgIII_TPII_RoccaFederico\Prog_TPII_RoccaFederico\obj\Debug\Prog_TPII_RoccaFederico.frmBuscarArticulo.resources

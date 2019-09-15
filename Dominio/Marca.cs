@@ -18,6 +18,11 @@ namespace Dominio
             codigo = _codigo;
         }
 
+        public Marca(int _codigo)
+        {
+            codigo = _codigo;
+        }
+
         public override string ToString()
         {
             return descripcion;

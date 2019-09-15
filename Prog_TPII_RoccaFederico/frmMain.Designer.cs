@@ -90,6 +90,7 @@
             this.smiArticuloBuscar.Name = "smiArticuloBuscar";
             this.smiArticuloBuscar.Size = new System.Drawing.Size(180, 22);
             this.smiArticuloBuscar.Text = "Buscar";
+            this.smiArticuloBuscar.Click += new System.EventHandler(this.smiArticuloBuscar_Click);
             // 
             // ddbtnCategorias
             // 

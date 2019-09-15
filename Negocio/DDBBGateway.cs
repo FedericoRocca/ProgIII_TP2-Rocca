@@ -72,7 +72,15 @@ namespace Negocio
         /// </summary>
         public void addParameter(object name, object value)
         {
-            command.Parameters.AddWithValue(name.ToString(), value.ToString());
+            try
+            {
+                command.Parameters.AddWithValue(name.ToString(), value.ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         /// <summary>

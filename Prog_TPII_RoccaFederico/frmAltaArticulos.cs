@@ -37,13 +37,31 @@ namespace Prog_TPII_RoccaFederico
         {
             try
             {
-                if( registro == null )
-                {
-                    MarcaNegocio marcaNegocio = new MarcaNegocio();
-                    CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+                MarcaNegocio marcaNegocio = new MarcaNegocio();
+                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
 
-                    cmbMarca.DataSource = marcaNegocio.listarMarcas();
-                    cmbCategoria.DataSource = categoriaNegocio.listarCategorias();
+                cmbMarca.DataSource = marcaNegocio.listarMarcas();
+                cmbMarca.ValueMember = "codigo";
+                cmbMarca.DisplayMember = "descripcion";
+
+                cmbCategoria.DataSource = categoriaNegocio.listarCategorias();
+                cmbCategoria.ValueMember = "codigo";
+                cmbCategoria.DisplayMember = "descripcion";
+
+                if ( registro == null )
+                {
+                    cmbMarca.SelectedIndex = -1;
+                    cmbCategoria.SelectedIndex = -1;
+                }
+                else
+                {
+                    txbCodigo.Text = registro.codigo.ToString();
+                    txbNombre.Text = registro.nombre.ToString();
+                    txbDescripcion.Text = registro.descripcion.ToString();
+                    cmbMarca.SelectedValue = registro.marca.codigo;
+                    cmbCategoria.SelectedValue = registro.categoria.codigo;
+                    txbImagen.Text = registro.imagen.ToString();
+                    txbPrecio.Text = registro.precio.ToString();
                 }
             }
             catch (Exception ex)
@@ -58,27 +76,50 @@ namespace Prog_TPII_RoccaFederico
             try
             {
                 ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-                registro = new Articulo();
-                registro.categoria = (Categoria)cmbCategoria.SelectedItem;
-                registro.marca = (Marca)cmbMarca.SelectedItem;
-                registro.codigo = txbCodigo.Text;
-                registro.descripcion = txbDescripcion.Text;
-                registro.imagen = txbImagen.Text;
-                registro.nombre = txbNombre.Text;
-                decimal _precio;
-                if (decimal.TryParse(txbPrecio.Text, out _precio))
+                if (registro == null)
                 {
-                    registro.precio = _precio;
-                }
+                    registro = new Articulo();
+                    registro.categoria = (Categoria)cmbCategoria.SelectedItem;
+                    registro.marca = (Marca)cmbMarca.SelectedItem;
+                    registro.codigo = txbCodigo.Text;
+                    registro.descripcion = txbDescripcion.Text;
+                    registro.imagen = txbImagen.Text;
+                    registro.nombre = txbNombre.Text;
+                    decimal _precio;
+                    if (decimal.TryParse(txbPrecio.Text, out _precio))
+                    {
+                        registro.precio = _precio;
+                    }
 
-                if( articuloNegocio.altaArticulo( registro ) )
-                {
-                    MessageBox.Show("Articulo dado de alta de manera correcta.");
-                    this.Dispose();
+                    if (articuloNegocio.altaArticulo(registro))
+                    {
+                        MessageBox.Show("Articulo dado de alta de manera correcta.");
+                        this.Dispose();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al dar de alta el artículo.");
+                    } 
                 }
                 else
                 {
-                    MessageBox.Show("Error al dar de alta el artículo.");
+                    registro.categoria = (Categoria)cmbCategoria.SelectedItem;
+                    registro.marca = (Marca)cmbMarca.SelectedItem;
+                    registro.codigo = txbCodigo.Text;
+                    registro.descripcion = txbDescripcion.Text;
+                    registro.imagen = txbImagen.Text;
+                    registro.nombre = txbNombre.Text;
+                    decimal _precio;
+                    decimal.TryParse(txbPrecio.Text, out _precio);
+                    if (articuloNegocio.modificarArticulo(registro))
+                    {
+                        MessageBox.Show("Articulo modificado de manera correcta.");
+                        this.Dispose();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al modificar el artículo.");
+                    }
                 }
 
             }

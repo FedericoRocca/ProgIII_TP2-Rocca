@@ -87,7 +87,6 @@ namespace Prog_TPII_RoccaFederico
                     aux.descripcion = dgvListaMarcas.SelectedRows[0].Cells[1].Value.ToString();
 
                     frmModificacionMarca modificar = new frmModificacionMarca();
-
                     for (int i = 0; i < Application.OpenForms.Count; i++)
                     {
                         if (Application.OpenForms[i].GetType() == typeof(frmMain))

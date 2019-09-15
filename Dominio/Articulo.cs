@@ -40,5 +40,25 @@ namespace Dominio
             imagen = _imagen;
             precio = _precio;
         }
+
+        public Articulo(
+            Int32 _id,
+            string _codigo,
+            string _nombre,
+            string _descripcion,
+            Int32 _Idmarca,
+            Int32 _IdCategoria,
+            string _imagen,
+            decimal _precio)
+        {
+            id = _id;
+            codigo = _codigo;
+            nombre = _nombre;
+            descripcion = _descripcion;
+            marca = new Marca(_Idmarca);
+            categoria = new Categoria(_IdCategoria);
+            imagen = _imagen;
+            precio = _precio;
+        }
     }
 }

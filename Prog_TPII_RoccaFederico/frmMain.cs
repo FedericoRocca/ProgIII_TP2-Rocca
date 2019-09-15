@@ -247,5 +247,33 @@ namespace Prog_TPII_RoccaFederico
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void smiArticuloBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool isfrmBuscarArticulo = false;
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+                    if( Application.OpenForms[i].GetType() == typeof( frmBuscarArticulo ) )
+                    {
+                        isfrmBuscarArticulo = true;
+                    }
+                }
+
+                if( !isfrmBuscarArticulo )
+                {
+                    frmBuscarArticulo frmBusquedaArticulo = new frmBuscarArticulo();
+                    frmBusquedaArticulo.MdiParent = this;
+                    frmBusquedaArticulo.Show();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

@@ -11,11 +11,13 @@ namespace Negocio
     public class MarcaNegocio
     {
 
+
         public bool altaMarcaDB(Marca reg)
         {
             DDBBGateway ddbbData = new DDBBGateway();
             try
             {
+                Validator.validate(reg);
                 ddbbData.prepareStatement("insert into MARCAS values(@Descripcion)");
                 ddbbData.addParameter("@Descripcion", reg.descripcion);
                 ddbbData.sendStatement();
@@ -27,10 +29,10 @@ namespace Negocio
                 else return true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             finally
             {
@@ -47,7 +49,6 @@ namespace Negocio
 
             try
             {
-
                 ddbbData.prepareQuery("select Id, Descripcion from MARCAS");
                 ddbbData.sendQuery();
 
@@ -109,7 +110,6 @@ namespace Negocio
 
             try
             {
-
                 ddbbData.prepareStatement("delete from MARCAS where Id = '" + reg.codigo + "' and Descripcion = '" + reg.descripcion + "';");
                 ddbbData.sendStatement();
 
@@ -147,10 +147,10 @@ namespace Negocio
                 else return true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             finally
             {

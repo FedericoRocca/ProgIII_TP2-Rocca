@@ -30,17 +30,25 @@ namespace Prog_TPII_RoccaFederico
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            if (categoriaNegocio.modificarCategoria(aux, txbDescripcion.Text) == false)
+            try
             {
-                MessageBox.Show("Hubo un error al modificar la categoría.");
+                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+                if (categoriaNegocio.modificarCategoria(aux, txbDescripcion.Text) == false)
+                {
+                    MessageBox.Show("Hubo un error al modificar la categoría.");
+                }
+                else
+                {
+                    dgvAux.DataSource = categoriaNegocio.listarCategorias();
+                    dgvAux.Refresh();
+                    MessageBox.Show("Se modificó la categoría correctamente.");
+                    this.Dispose();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                dgvAux.DataSource = categoriaNegocio.listarCategorias();
-                dgvAux.Refresh();
-                MessageBox.Show("Se modificó la categoría correctamente.");
-                this.Dispose();
+
+                MessageBox.Show(ex.Message);
             }
         }
 

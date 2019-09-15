@@ -18,6 +18,11 @@ namespace Dominio
             descripcion = _descripcion;
         }
 
+        public Categoria(Int32 _codigo)
+        {
+            codigo = _codigo;
+        }
+
         public override string ToString()
         {
             return descripcion;

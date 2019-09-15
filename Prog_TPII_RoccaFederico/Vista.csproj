@@ -64,6 +64,12 @@
     <Compile Include="frmAltaMarca.Designer.cs">
       <DependentUpon>frmAltaMarca.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBuscarArticulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBuscarArticulo.Designer.cs">
+      <DependentUpon>frmBuscarArticulo.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBuscarCategoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAltaMarca.resx">
       <DependentUpon>frmAltaMarca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscarArticulo.resx">
+      <DependentUpon>frmBuscarArticulo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBuscarCategoria.resx">
       <DependentUpon>frmBuscarCategoria.cs</DependentUpon>

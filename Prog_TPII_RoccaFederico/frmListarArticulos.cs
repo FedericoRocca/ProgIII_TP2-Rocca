@@ -74,7 +74,36 @@ namespace Prog_TPII_RoccaFederico
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                bool isModificarArticuloOpen = false;
+                for (int i = 0; i < Application.OpenForms.Count; i++)
+                {
+                    if( Application.OpenForms[i].GetType() == typeof( frmAltaArticulos ) )
+                    {
+                        isModificarArticuloOpen = true;
+                    }
+                }
 
+                if( !isModificarArticuloOpen && dgvListaArticulos.RowCount > 0 )
+                {
+                    frmAltaArticulos frmModificar = new frmAltaArticulos((Articulo)dgvListaArticulos.CurrentRow.DataBoundItem);
+                    for (int i = 0; i < Application.OpenForms.Count; i++)
+                    {
+                        if( Application.OpenForms[i].GetType() == typeof(frmMain) )
+                        {
+                            frmModificar.MdiParent = Application.OpenForms[i];
+                        }
+                    }
+                    frmModificar.Show();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
